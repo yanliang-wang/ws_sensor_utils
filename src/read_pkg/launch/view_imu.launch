@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="rviz" type="rviz" name="rviz_imu" args="-d $(find read_pkg)/rviz/view_imu.rviz"/>
+
+    <include file="$(find xsens_driver)/launch/xsens_driver.launch"/>
+</launch>

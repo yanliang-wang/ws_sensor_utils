@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="rviz" type="rviz" name="rviz_velodyne" args="-d $(find read_pkg)/rviz/view_velodyne.rviz"/>
+
+
+    <param name="calibration" value="$(find read_pkg)/config/Puck_LITE.yaml"/>
+    <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch"/>
+</launch>
