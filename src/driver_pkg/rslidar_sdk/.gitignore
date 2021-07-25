@@ -1,0 +1,15 @@
+*.cproject
+*.project
+*~
+*.swp
+*.cur_trans
+build
+.vscode
+*.csv
+build/*
+cmake-build-debug/
+.idea/
+version.h
+*.pb.cc
+*.pb.h
+package.xml

@@ -1,0 +1,11 @@
+<launch>
+  <node 
+    pkg="rslidar_sdk" 
+    name="rslidar_sdk_node" 
+    type="rslidar_sdk_node"
+    args="config_pcap"        
+    output="screen"> <!-- args 输入config下yaml文件的名字   -->
+  </node>
+  <!-- rviz -->
+  <node pkg="rviz" name="rviz" type="rviz" args="-d $(find rslidar_sdk)/rviz/rviz.rviz" />
+</launch>
