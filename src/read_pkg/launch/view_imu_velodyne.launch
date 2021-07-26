@@ -1,0 +1,14 @@
+<launch>
+    <node pkg="rviz" type="rviz" name="rviz_velodyne" args="-d $(find read_pkg)/rviz/view_imu_velodyne.rviz"/>
+
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_velodyne" output="log"
+        args="1 0 0 0 0 0 /map /velodyne 20" />
+
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_imu" output="log"
+        args="-1 0 0 0 0 0 /map /imu 20" />
+
+    <include file="$(find xsens_driver)/launch/xsens_driver.launch"/>
+
+    <param name="calibration" value="$(find read_pkg)/config/Puck_LITE.yaml"/>
+    <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch"/>
+</launch>
