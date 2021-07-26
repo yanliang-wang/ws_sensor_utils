@@ -1,0 +1,6 @@
+html/
+latex/
+nodes/mtdef.pyc
+nodes/mtdevice.pyc
+Doxyfile
+Doxyfile.bak

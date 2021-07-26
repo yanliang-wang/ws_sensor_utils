@@ -4,6 +4,8 @@
 
 ### 1. IMU
 
+The default configuration can publish `sensors_msg/IMU` message including **orientation**, **angular_velocity**, **linear_acceleration**. So you can read the IMU message by run the following code.
+
 ```bash
 roslaunch read_pkg view_imu.launch
 ```
@@ -13,6 +15,21 @@ If there is an error called `[ERROR] [1627211303.220970]: Fatal: could not find 
 ```bash
 sudo chmod 777 /dev/ttyUSB0
 ```
+
+> Configure the IMU:
+>
+> 1. Xsens IMUs have much configuration we can modify, such as `baudrate`, `Synchronization settings`, `timeout`, etc. You can have an instruction by run the following code.
+>
+>    ```bash
+>    rosrun xsens_driver mtdevice.py -h
+>    ```
+>
+> 2. The most common configuration is to configure which kind of messages to publish. The following configuration is to set the driver to publish **orientation**, **linear_acceleration**, **angular_velocity**, which are very important information for robotic navigation.
+>
+>    ```bash
+>    rosrun xsens_driver mtdevice.py --configure="oq,aa,wr"
+>    ```
+>
 
 ### 2. Velodyne
 
