@@ -1,0 +1,9 @@
+[submodule "src/calib_pkg/lidar_imu_calib"]
+	path = src/calib_pkg/lidar_imu_calib
+	url = https://github.com/chennuo0125-HIT/lidar_imu_calib
+[submodule "src/calib_pkg/imu_utils"]
+	path = src/calib_pkg/imu_utils
+	url = https://github.com/gaowenliang/imu_utils.git
+[submodule "src/calib_pkg/code_utils"]
+	path = src/calib_pkg/code_utils
+	url = https://github.com/gaowenliang/code_utils
