@@ -1,11 +1,20 @@
+### 录制压缩点云配置
+# common:
+#   msg_source: 1
+#   send_packet_ros: true
+
+### 解压缩点云配置
+# common:
+#   msg_source: 2
+#   send_packet_ros: false
 common:
-  msg_source: 3                                         #0: not use Lidar
+  msg_source: 1                                         #0: not use Lidar
                                                         #1: packet message comes from online Lidar
                                                         #2: packet message comes from ROS or ROS2
                                                         #3: packet message comes from Pcap file
                                                         #4: packet message comes from Protobuf-UDP
                                                         #5: point cloud comes from Protobuf-UDP
-  send_packet_ros: false                                #true: Send packets through ROS or ROS2(Used to record packet)
+  send_packet_ros: true                                #true: Send packets through ROS or ROS2(Used to record packet)
   send_point_cloud_ros: true                            #true: Send point cloud through ROS or ROS2
   send_packet_proto: false                              #true: Send packets through Protobuf-UDP
   send_point_cloud_proto: false                         #true: Send point cloud through Protobuf-UDP
@@ -18,7 +27,7 @@ common:
   # pcap_path: /media/wang/4fe04659-7176-442d-8068-35d5d49ba5e9/datasets/20210707_cqgt/robosense-80-2/44.pcap  # 页很稳定,有动态车辆  
 lidar:
   - driver:
-      lidar_type: RS80            #LiDAR type - RS16, RS32, RSBP, RS128, RS80, RSM1, RSHELIOS
+      lidar_type: RS128            #LiDAR type - RS16, RS32, RSBP, RS128, RS80, RSM1, RSHELIOS
       frame_id: /rslidar           #Frame id of message
       msop_port: 6699              #Msop port of lidar
       difop_port: 7788             #Difop port of lidar
@@ -30,7 +39,7 @@ lidar:
       end_angle: 360               #End angle of point cloud  360 160 
       min_distance: 0            #Minimum distance of point cloud --dafult:0.2  #10
       max_distance: 200            #Maximum distance of point cloud --dafult:200  #75
-      use_lidar_clock: True       #True--Use the lidar clock as the message timestamp
+      use_lidar_clock: false       #True--Use the lidar clock as the message timestamp
                                    #False-- Use the system clock as the timestamp  
     ros:
       ros_recv_packet_topic: /rslidar_packets          #Topic used to receive lidar packets from ROS

@@ -1,0 +1,8 @@
+<launch>
+    <arg name="bag_file" default="/media/wang/disk_wyl/跨越险阻/2021-08-30-19-37-53.bag"/>
+
+    <node pkg="rosbag" type="play" name="play_hesai" args="--clock $(arg bag_file) -r 1 " output="screen"/>
+    
+    <node pkg="hesai_to_velodyne" type="hesai_to_velodyne" name="hesai_to_velodyne_node" args="XYZIRT XYZIRT"/>
+
+</launch>

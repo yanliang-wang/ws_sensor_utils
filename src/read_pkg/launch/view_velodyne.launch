@@ -1,5 +1,8 @@
 <launch>
-    <node pkg="rviz" type="rviz" name="rviz_velodyne" args="-d $(find read_pkg)/rviz/view_velodyne.rviz"/>
+    <arg name="rviz" default="true"/>
+    <group if="$(arg rviz)">
+        <node pkg="rviz" type="rviz" name="rviz_velodyne" args="-d $(find read_pkg)/rviz/view_velodyne.rviz"/>
+    </group>
 
 
     <param name="calibration" value="$(find read_pkg)/config/Puck_LITE.yaml"/>

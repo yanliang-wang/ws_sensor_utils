@@ -1,5 +1,8 @@
 <launch>
-    <node pkg="rviz" type="rviz" name="rviz_velodyne" args="-d $(find read_pkg)/rviz/view_imu_velodyne.rviz"/>
+    <arg name="rviz" default="true"/>
+    <group if="$(arg rviz)">
+        <node pkg="rviz" type="rviz" name="rviz_velodyne" args="-d $(find read_pkg)/rviz/view_imu_velodyne.rviz"/>
+    </group>
 
     <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_velodyne" output="log"
         args="1 0 0 0 0 0 /map /velodyne 20" />

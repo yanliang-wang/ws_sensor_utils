@@ -19,8 +19,8 @@ if(${ENABLE_TRANSFORM})
   add_definitions("-DENABLE_TRANSFORM")
 endif(${ENABLE_TRANSFORM})
 
-set(rs_driver_INCLUDE_DIRS "/home/wang/wang/git_files/driver_ws/src/driver_pkg/rslidar_sdk/src/rs_driver/src;/usr/local/Project/include")
-set(RS_DRIVER_INCLUDE_DIRS "/home/wang/wang/git_files/driver_ws/src/driver_pkg/rslidar_sdk/src/rs_driver/src;/usr/local/Project/include")
+set(rs_driver_INCLUDE_DIRS "/home/wang/wang/git_nrsl/driver_ws/src/driver_pkg/rslidar_sdk/src/rs_driver/src;/usr/local/Project/include")
+set(RS_DRIVER_INCLUDE_DIRS "/home/wang/wang/git_nrsl/driver_ws/src/driver_pkg/rslidar_sdk/src/rs_driver/src;/usr/local/Project/include")
 
 set(rs_driver_LIBRARIES "/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_regex.so;pcap")
 set(RS_DRIVER_LIBRARIES "/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_regex.so;pcap")

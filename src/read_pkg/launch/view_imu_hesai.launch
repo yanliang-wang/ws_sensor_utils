@@ -1,0 +1,25 @@
+<launch>
+    <arg name="rviz" default="false"/>
+    <group if="$(arg rviz)">
+        <node pkg="rviz" type="rviz" name="rviz_hesai" args="-d $(find read_pkg)/rviz/view_imu_hesai.rviz"/>
+    </group>
+
+    <!-- <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_rslidar" output="log"
+        args="1 0 0 0 0 0 /map /rslidar 20" />
+
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_velodyne" output="log"
+        args="1 0 0 0 0 0 /map /velodyne 20" />
+
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_imu" output="log"
+        args="-1 0 0 0 0 0 /map /imu 20" /> -->
+
+    <include file="$(find xsens_driver)/launch/xsens_driver.launch"/>
+
+    <include file="$(find hesai_lidar)/launch/hesai_lidar.launch" >
+        <arg name="lidar_type" default="PandarQT"/>
+        <arg name="frame_id" default="PandarQT"/>
+    </include>
+    
+    <node pkg="hesai_to_velodyne" type="hesai_to_velodyne" name="hesai_to_velodyne_node" args="XYZIRT XYZIRT"/>
+
+</launch>

@@ -1,0 +1,18 @@
+<launch>
+  <node 
+    pkg="rslidar_sdk" 
+    name="rslidar_sdk_node" 
+    type="rslidar_sdk_node"
+    args="config_decoder"        
+    output="screen"> <!-- args 输入config下yaml文件的名字   -->
+  </node>
+  <!-- rviz -->
+  <arg name="rviz" value="false"/>
+
+  <node pkg="rosbag" type="play" name="play_decode" args="--clock /media/wang/disk_wyl/calib/2021-08-15-19-18-32.bag -s 0 -r 3"/>
+
+  <!-- 将rslidar格式转为velodyne格式（可选） -->
+  <node pkg="rs_to_velodyne" type="rs_to_velodyne" name="rs_to_velodyne_node" args="XYZIRT XYZIRT"/>
+
+  <node if="$(arg rviz)" pkg="rviz" name="rviz" type="rviz" args="-d $(find rslidar_sdk)/rviz/decoder.rviz" />
+</launch>

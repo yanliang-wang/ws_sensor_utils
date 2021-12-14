@@ -1,0 +1,17 @@
+<launch>
+    <arg name="rviz" default="true"/>
+    <group if="$(arg rviz)">
+        <node pkg="rviz" type="rviz" name="rviz_livox" args="-d $(find read_pkg)/rviz/view_imu_livox.rviz"/>
+    </group>
+
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_livox" output="log"
+        args="1 0 0 0 0 0 /map /livox_frame 20" />
+
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_imu" output="log"
+        args="-1 0 0 0 0 0 /map /imu 20" />
+
+    <include file="$(find xsens_driver)/launch/xsens_driver.launch"/>
+
+    <include file="$(find livox_ros_driver)/launch/livox_lidar_msg.launch"/>
+    <!-- <include file="$(find livox_ros_driver)/launch/livox_lidar_rviz.launch"/> -->
+</launch>

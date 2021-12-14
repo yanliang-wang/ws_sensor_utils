@@ -7,5 +7,7 @@
     output="screen"> <!-- args 输入config下yaml文件的名字   -->
   </node>
   <!-- rviz -->
-  <node pkg="rviz" name="rviz" type="rviz" args="-d $(find rslidar_sdk)/rviz/rviz.rviz" />
+  <arg name="rviz" default="true"/>
+
+  <node if="$(arg rviz)" pkg="rviz" name="rviz" type="rviz" args="-d $(find rslidar_sdk)/rviz/rviz.rviz" />
 </launch>

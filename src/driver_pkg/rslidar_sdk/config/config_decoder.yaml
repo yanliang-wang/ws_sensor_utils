@@ -1,0 +1,59 @@
+### 录制压缩点云配置
+# common:
+#   msg_source: 1
+#   send_packet_ros: true
+
+### 解压缩点云配置
+# common:
+#   msg_source: 2
+#   send_packet_ros: false
+common:
+  msg_source: 2                                         #0: not use Lidar
+                                                        #1: packet message comes from online Lidar
+                                                        #2: packet message comes from ROS or ROS2
+                                                        #3: packet message comes from Pcap file
+                                                        #4: packet message comes from Protobuf-UDP
+                                                        #5: point cloud comes from Protobuf-UDP
+  send_packet_ros: false                                #true: Send packets through ROS or ROS2(Used to record packet)
+  send_point_cloud_ros: true                            #true: Send point cloud through ROS or ROS2
+  send_packet_proto: false                              #true: Send packets through Protobuf-UDP
+  send_point_cloud_proto: false                         #true: Send point cloud through Protobuf-UDP
+  #pcap_path: /media/wang/4fe04659-7176-442d-8068-35d5d49ba5e9/datasets/rslidar_32_pcap/truck_ground/two_truck_ground.pcap     #The path of pcap file
+  # pcap_path: /media/wang/4fe04659-7176-442d-8068-35d5d49ba5e9/datasets/rslidar_80_pcap/excavator_top/scrap_excavator_top_80.pcap     
+
+
+  # pcap_path: /media/wang/4fe04659-7176-442d-8068-35d5d49ba5e9/datasets/20210707_cqgt/robosense-80-1/2.pcap  
+  pcap_path: /media/wang/4fe04659-7176-442d-8068-35d5d49ba5e9/datasets/20210707_cqgt/robosense-80-2/22.pcap  # 比较稳定,有动态车,有行人
+  # pcap_path: /media/wang/4fe04659-7176-442d-8068-35d5d49ba5e9/datasets/20210707_cqgt/robosense-80-2/44.pcap  # 页很稳定,有动态车辆  
+lidar:
+  - driver:
+      lidar_type: RS128            #LiDAR type - RS16, RS32, RSBP, RS128, RS80, RSM1, RSHELIOS
+      frame_id: /rslidar           #Frame id of message
+      msop_port: 6699              #Msop port of lidar
+      difop_port: 7788             #Difop port of lidar
+      # start_angle: 30               #Start angle of point cloud 320 30
+      # end_angle: 160               #End angle of point cloud  360 160 
+      # min_distance: 30            #Minimum distance of point cloud --dafult:0.2  #10
+      # max_distance: 70            #Maximum distance of point cloud --dafult:200  #75      
+      start_angle: 0               #Start angle of point cloud 320 30
+      end_angle: 360               #End angle of point cloud  360 160 
+      min_distance: 0            #Minimum distance of point cloud --dafult:0.2  #10
+      max_distance: 200            #Maximum distance of point cloud --dafult:200  #75
+      use_lidar_clock: false       #True--Use the lidar clock as the message timestamp
+                                   #False-- Use the system clock as the timestamp  
+    ros:
+      ros_recv_packet_topic: /rslidar_packets          #Topic used to receive lidar packets from ROS
+      ros_send_packet_topic: /rslidar_packets          #Topic used to send lidar packets through ROS
+      ros_send_point_cloud_topic: /rslidar_points      #Topic used to send point cloud through ROS
+    proto:
+      point_cloud_recv_port: 60021                     #Port number used for receiving point cloud 
+      point_cloud_send_port: 60021                     #Port number which the point cloud will be send to
+      msop_recv_port: 60022                            #Port number used for receiving lidar msop packets
+      msop_send_port: 60022                            #Port number which the msop packets will be send to 
+      difop_recv_port: 60023                           #Port number used for receiving lidar difop packets
+      difop_send_port: 60023                           #Port number which the difop packets will be send to 
+      point_cloud_send_ip: 127.0.0.1                   #Ip address which the point cloud will be send to 
+      packet_send_ip: 127.0.0.1                        #Ip address which the lidar packets will be send to
+
+
+

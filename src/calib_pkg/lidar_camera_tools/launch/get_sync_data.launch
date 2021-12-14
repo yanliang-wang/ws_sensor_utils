@@ -1,0 +1,12 @@
+<launch>
+    
+    <param name="img_topic" value="/camera/color/image_raw"/>
+    <param name="pc_topic" value="/velodyne_points"/>
+
+    <!-- 推荐使用雷达的频率 -->
+    <param name="frequency" value="10"/>
+
+    <!-- 设置数据输出的路径 -->
+    <param name="output_path" value="$(env HOME)/tmp/output"/>
+    <node pkg="lidar_camera_tools" type="get_sync_data_node" name="get_sync_data_node" output="screen"/>
+</launch>

@@ -1,0 +1,9 @@
+<launch>
+
+    <arg name="rviz" default="true"/>
+    <include file="$(find ouster_ros)/ouster.launch">
+        <arg name="replay" default="true"/>
+        <arg name="rviz" value="$(arg rviz)"/>
+        <arg name="metadata" default="metadata"/>
+    </include>
+</launch>

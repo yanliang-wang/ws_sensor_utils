@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="lidar_imu_calib" type="calib_exR_lidar2imu_node" name="calib_exR_lidar2imu_node" output="screen">
+        <param name="/lidar_topic" value="/velodyne_points"/>
+        <param name="/imu_topic" value="/imu/data"/>
+        <param name="/bag_file" value="/home/wang/wang/git_files/driver_ws/data/lidar_imu_2021-07-26-22-40-53.bag"/>
+    </node>
+</launch>

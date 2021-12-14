@@ -1,0 +1,24 @@
+<launch>
+    <arg name="rviz" default="true"/>
+    <group if="$(arg rviz)">
+        <node pkg="rviz" type="rviz" name="rviz_rslidar" args="-d $(find read_pkg)/rviz/view_imu_rslidar.rviz"/>
+    </group>
+
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_rslidar" output="log"
+        args="1 0 0 0 0 0 /map /rslidar 20" />
+
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_velodyne" output="log"
+        args="1 0 0 0 0 0 /map /velodyne 20" />
+
+    <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher_imu" output="log"
+        args="-1 0 0 0 0 0 /map /imu 20" />
+
+    <include file="$(find xsens_driver)/launch/xsens_driver.launch"/>
+
+    <include file="$(find rslidar_sdk)/launch/start.launch">
+        <arg name="rviz" value="false"/>
+    </include>
+    
+    <node pkg="rs_to_velodyne" type="rs_to_velodyne" name="rs_to_velodyne_node" args="XYZIRT XYZIRT"/>
+
+</launch>

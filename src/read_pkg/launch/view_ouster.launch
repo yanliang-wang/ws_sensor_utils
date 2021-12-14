@@ -1,0 +1,9 @@
+<launch>
+    <arg name="rviz" default="true"/>
+    <include file="$(find ouster_ros)/ouster.launch">
+        <arg name="sensor_hostname" default="os-992106000191.local"/>
+        <arg name="timestamp_mode" default="TIME_FROM_PTP_1588"/>
+        <arg name="rviz" value="$(arg rviz)"/>
+        <arg name="metadata" default="metadata"/>
+    </include>
+</launch>
