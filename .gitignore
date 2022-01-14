@@ -1,6 +1,6 @@
 *build/
 *devel/
-*data/
+**/data/
 *.vscode/
 .catkin_workspace
 src/CMakeLists.txt
