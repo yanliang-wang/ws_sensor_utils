@@ -4,3 +4,5 @@
 *.vscode/
 .catkin_workspace
 src/CMakeLists.txt
+**/.idea/
+**/cmake-build-debug/
