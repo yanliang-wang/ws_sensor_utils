@@ -7,8 +7,8 @@ This workspace provides some ROS drivers and calibration tools of sensors I have
 |  Type  |                            Model                             |
 | :----: | :----------------------------------------------------------: |
 |  IMU   |                       Xsens MTi-series                       |
-| LiDAR  | Velodyne, RS-Ruby(128), Livox-Horizon, Ouster OS0, hesai-Pandar64 |
-| Camera |                           Ladybug3                           |
+| LiDAR  | Velodyne-16, RS-Ruby(128), Livox-Horizon, Ouster OS0, hesai-Pandar64 |
+| Camera |               Realsense D435-series, Ladybug3                |
 
 **Calibration tools**
 
@@ -33,6 +33,8 @@ This workspace provides some ROS drivers and calibration tools of sensors I have
     - [7. Hesai](#7-hesai)
   - [Intrinsic Calibration](#intrinsic-calibration)
     - [1. Calibrate the camera intrinsic parameters](#1-calibrate-the-camera-intrinsic-parameters)
+      - [a. Kalibr](#a-kalibr)
+      - [b. ROS camera_calibration package](#b-ros-camera_calibration-package)
     - [2. Calibrate the noise and random walk noise of bias(IMU)](#2-calibrate-the-noise-and-random-walk-noise-of-biasimu)
   - [Extrinsic Calibration](#extrinsic-calibration)
     - [1. Calibrate the extrinsic parameters between LiDAR and IMU](#1-calibrate-the-extrinsic-parameters-between-lidar-and-imu)
@@ -188,7 +190,39 @@ rosrun hesai_to_velodyne hesai_to_velodyne XYZIRT XYZIRT
 
 ### 1. Calibrate the camera intrinsic parameters 
 
-Refer to [【Ros】摄像头标定camera calibration](https://bbs.nrs-lab.com/t/5ca16037001aec799cbea6ed) or [kalibr](https://github.com/ethz-asl/kalibr).
+#### a. Kalibr
+
+Refer to [kalibr](https://github.com/ethz-asl/kalibr/wiki/installation) for installation. 
+
+Step: 
+
+- prepare the calibration board and the config file of calibration board: [download](https://github.com/ethz-asl/kalibr/wiki/downloads) or [create custom targets](https://github.com/ethz-asl/kalibr/wiki/calibration-targets)
+
+- record the throttled camera topic
+
+  ```bash
+  rosrun topic_tools throttle messages /camera/color/image_raw 4 /camera/color/image_raw_throttle # 4hz is enough
+  
+  rosbag record /camera/color/image_raw_throttle
+  ```
+
+  > when collecting the data, **the calibration board should be in the FOV of the camera and the pose for the camera should be as diverse as possible** .
+
+- calibrate it
+
+  ```bash
+  rosrun kalibr kalibr_calibrate_cameras --bag d435-2022-06-12-11-20-10.bag --topics /camera/color/image_raw_throttle --models pinhole-radtan --target april_6x6.yaml
+  ```
+
+  > As for the distortion model of a camera, you can use `pinhole-radtan` if you are using a pin-hole camera.
+  >
+  > You can get more details on https://github.com/ethz-asl/kalibr/wiki/supported-models#distortion-models.
+
+  And the calibration result will be saved in `<bag-name>-results-cam.txt`.
+
+#### b. ROS camera_calibration package
+
+Refer to [【Ros】摄像头标定camera calibration](https://bbs.nrs-lab.com/t/5ca16037001aec799cbea6ed).
 
 ### 2. Calibrate the noise and random walk noise of bias(IMU)
 
@@ -285,7 +319,6 @@ Refer to [lidar_appearance_calibration](https://github.com/ram-lab/lidar_appeara
 - [ ] Detailed introduction to calibration tools between LiDARs
 - [ ] Detailed introduction to calibration tools between cameras
 - [ ] Detailed introduction to calibration tools of camera intrinsic parameter
-- [ ] Introduction to other sensors such as [GPS](https://bbs.nrs-lab.com/t/5ca4cc80001aec799cbea737), [Realsense](https://bbs.nrs-lab.com/t/5caf0a07001aec799cbea75c) series and so on.
 
 # Reference
 
